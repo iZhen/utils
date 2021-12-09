@@ -17,6 +17,9 @@
       console.log(`Code matched = ${decodedText}`, decodedResult);
       ctx.innerText = decodedText;
       ctx.href = decodedText;
+      if (/^laifenqi/i.test(decodedText)) {
+        window.open = decodedText;
+      }
     }
 
     function onScanFailure(error) {
