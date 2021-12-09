@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <a id="ctx">1122211</a>
+  <a id="ctx">3333</a>
   <div id="reader"></div>
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
   <script>
@@ -17,9 +17,9 @@
       console.log(`Code matched = ${decodedText}`, decodedResult);
       ctx.innerText = decodedText;
       ctx.href = decodedText;
-      // if (/^laifenqi/i.test(decodedText)) {
+      if (/^laifenqi/i.test(decodedText)) {
         window.location.href = decodedText;
-      // }
+      }
     }
 
     function onScanFailure(error) {
