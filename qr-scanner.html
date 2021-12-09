@@ -9,14 +9,17 @@
 <body>
   <div id="app">
     <video id="video" style="display: block; width: 100%;"></video>
-    <div id="content"></div>
+    <div id="content">init</div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/qr-scanner@1.3.0/qr-scanner.umd.min.js"></script>
   <script>
     const domContent = document.getElementById('content');
     const qrScanner = new QrScanner(document.getElementById('video'), result => {
-      domContent.innerHTML = result;
-      window.open(result);
+      if (result) {
+        domContent.innerHTML = result;
+      }
+    }, (err) => {
+        domContent.innerHTML = 'error:' + err;
     });
     qrScanner.start();
   </script>
