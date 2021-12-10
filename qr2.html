@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a id="ctx">init</a>
+  <input type="file" id="qr-input-file" accept="image/*" capture>
+  <div id="reader"></div>
+
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script>
+    const ctx = document.getElementById('ctx');
+    function onScanSuccess(decodedText, decodedResult) {
+      // handle the scanned code as you like, for example:
+      console.log(`Code matched = ${decodedText}`, decodedResult);
+      ctx.innerText = decodedText;
+      ctx.href = decodedText;
+      if (/^laifenqi/i.test(decodedText)) {
+        window.location.href = decodedText;
+      }
+    }
+
+    const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+    // File based scanning
+    const fileinput = document.getElementById('qr-input-file');
+    fileinput.addEventListener('change', e => {
+      if (e.target.files.length == 0) {
+        // No file selected, ignore
+        return;
+      }
+
+      const imageFile = e.target.files[0];
+      // Scan QR Code
+      html5QrCode.scanFile(imageFile, true)
+      .then(onScanSuccess)
+      .catch(err => {
+        // failure, handle it.
+        console.log(`Error scanning file. Reason: ${err}`)
+      });
+    });
+  </script>
+</body>
+</html>
