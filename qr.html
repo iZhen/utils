@@ -14,11 +14,12 @@
     const ctx = document.getElementById('ctx');
     function onScanSuccess(decodedText, decodedResult) {
       // handle the scanned code as you like, for example:
-      console.log(`Code matched = ${decodedText}`, decodedResult);
+      // console.log(`Code matched = ${decodedText}`, decodedResult);
       ctx.innerText = decodedText;
       ctx.href = decodedText;
-      if (/^laifenqi/i.test(decodedText)) {
-        window.location.href = decodedText;
+      if (decodedText) {
+        window.location.href = 'laifenqi://openapp?url=laifenqi%3A%2F%2FrnMultiplePage%3Fmodule%3Dconfirm_info&content='
+          + encodeURIComponent(decodedText);
       }
     }
 
