@@ -6,14 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>扫一扫</title>
   <style>
-    html, body {
-      margin: 0;
-      background-color: #333;
-    }
-    #reader {
-      width: 100vw;
-      height: 100vh;
-    }
+    html, body { margin: 0; background-color: #333; }
+    #reader { width: 100vw; height: 100vh; }
     #tips, #error {
       position: absolute;
       top: 10%;
@@ -22,12 +16,8 @@
       color: #fff;
       text-align: center;
     }
-    #tips h2 {
-      font-size: 18px;
-    }
-    #tips p {
-      font-size: 12px;
-    }
+    #tips h2 { font-size: 18px; }
+    #tips p { font-size: 12px; }
   </style>
 </head>
 <body>
@@ -50,7 +40,7 @@
         qrbox: { width: 250, height: 250 },
         aspectRatio: window.screen.width / window.screen.height,
       }, function onScanSuccess(decodedText) {
-        if (decodedText && /^\{.+\}$/i.test(decodedText)) {
+        if (decodedText) {
           window.location.href =
             'laifenqi://openapp?url=laifenqi%3A%2F%2FrnMultiplePage%3Fmodule%3Dconfirm_info&content='
             + encodeURIComponent(decodedText);
