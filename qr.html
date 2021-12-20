@@ -39,7 +39,7 @@
       var tipMsg = document.getElementById('tips');
       var html5QrCode = new Html5Qrcode("reader");
       var size = window.screen.width * 2 / 3;
-      var aspectRatio = window.screen.width / window.screen.height;
+      var aspectRatio = Number((window.screen.width / window.screen.height).toFixed(2));
       var opts = {
         fps: 10,
         qrbox: { width: size, height: size },
