@@ -39,26 +39,29 @@
       var tipMsg = document.getElementById('tips');
       var html5QrCode = new Html5Qrcode("reader");
       var size = window.screen.width * 2 / 3;
-      html5QrCode.start({
-        facingMode: "environment"
-      }, {
+      var aspectRatio = window.screen.width / window.screen.height;
+      var opts = {
         fps: 10,
         qrbox: { width: size, height: size },
-        aspectRatio: window.screen.width / window.screen.height,
-      }, function onScanSuccess(decodedText) {
+        aspectRatio: aspectRatio,
+      }
+      console.log(opts);
+      html5QrCode.start({
+        facingMode: "environment"
+      }, opts, function onScanSuccess(decodedText) {
         if (decodedText) {
           window.location.href =
             'laifenqi://openapp?url=laifenqi%3A%2F%2FrnMultiplePage%3Fmodule%3Dconfirm_info&content='
             + encodeURIComponent(decodedText);
         }
       }, function onScanError(err) {
-        console.log(err);
+        // console.log(err);
       }).catch(function handleCatch(err) {
         tipMsg.style.display = 'none';
         if (/permission denied/i.test(err)) {
           errorMsg.innerText = '请打开摄像头权限！';
         }
-        console.log('catch', err);
+        // console.log('catch', err);
       });
     })()
   </script>
