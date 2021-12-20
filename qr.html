@@ -50,9 +50,10 @@
       var size = window.screen.width * 2 / 3;
       var aspectRatio = window.screen.width / window.screen.height;
       var opts = {
-        fps: 2,
+        fps: 1,
         qrbox: { width: size, height: size },
         // aspectRatio: aspectRatio,
+        formatsToSupport: [0],
       }
       // console.log(opts);
       html5QrCode.start({
