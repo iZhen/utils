@@ -56,30 +56,37 @@
       };
       var html5QrCode = new Html5Qrcode("reader");
 
-      html5QrCode.start({
-        facingMode: "environment"
-      }, opts, function onScanSuccess(decodedText) {
+      function onScanSuccess(decodedText) {
         console.log('onScanSuccess', decodedText);
         if (decodedText) {
           window.location.href =
             'laifenqi://openapp?url=laifenqi%3A%2F%2FrnMultiplePage%3Fmodule%3Dconfirm_info&content='
             + encodeURIComponent(decodedText);
         }
-      }, function onScanError(err) {
-        console.log('onScanError', err);
-      }).catch(function handleCatch(err) {
+      }
+
+      function onScanError(err) {
         tipMsg.style.display = 'none';
         if (/permission denied/i.test(err)) {
           errorMsg.innerText = '请打开摄像头权限！';
         }
         console.log('catch', err);
-      });
+      }
+
+      function startScan() {
+        html5QrCode.start({
+          facingMode: "environment"
+        }, opts, onScanSuccess).catch(onScanError);
+      }
+      startScan();
 
       document.getElementById('file').addEventListener('change', e => {
         if (e.target.files.length == 0) { return; }
-        const imageFile = e.target.files[0];
-        html5QrCode.scanFile(imageFile, true).then(onScanSuccess).catch(err => {
-          console.log('scanFile', err)
+        html5QrCode.stop().then(function () {
+          const imageFile = e.target.files[0];
+          return html5QrCode.scanFile(imageFile, true).then(onScanSuccess).catch(onScanError);
+        }).finally(function () {
+          startScan();
         });
       });
     })()
