@@ -59,6 +59,7 @@
       html5QrCode.start({
         facingMode: "environment"
       }, opts, function onScanSuccess(decodedText) {
+        console.log('onScanSuccess', decodedText);
         if (decodedText) {
           window.location.href =
             'laifenqi://openapp?url=laifenqi%3A%2F%2FrnMultiplePage%3Fmodule%3Dconfirm_info&content='
