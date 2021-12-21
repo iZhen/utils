@@ -24,7 +24,7 @@
       }
     }
 
-    const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+    const html5QrCode = new Html5Qrcode("reader", true);
     // File based scanning
     const fileinput = document.getElementById('qr-input-file');
     fileinput.addEventListener('change', e => {
