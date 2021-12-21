@@ -15,7 +15,7 @@
     #reader {
       width: 100vw;
     }
-    #tips, #error, #select-file {
+    #tips, #select-file {
       margin: 30px 0;
       color: #fff;
       text-align: center;
@@ -46,7 +46,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.1.3/html5-qrcode.min.js" type="text/javascript"></script>
   <script>
     (function () {
-      var errorMsg = document.getElementById('error');
       var tipMsg = document.getElementById('tips');
       var size = window.screen.width * 2 / 3;
       var opts = {
@@ -66,9 +65,10 @@
       }
 
       function onScanError(err) {
-        tipMsg.style.display = 'none';
         if (/permission denied/i.test(err)) {
-          errorMsg.innerText = '请打开摄像头权限！';
+          alert('请打开摄像头权限！');
+        } else {
+          alert('识别失败，请重新尝试！');
         }
         console.log('catch', err);
       }
